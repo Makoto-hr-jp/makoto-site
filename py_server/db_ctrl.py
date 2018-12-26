@@ -5,6 +5,7 @@ Svrha: upravljanje bazom podataka
 '''
 #built-in
 from hashlib import sha256
+from datetime import datetime
 
 # addons
 import mysql.connector as sql
@@ -36,9 +37,26 @@ def _check_field(field):
             return False
     return True
 
+req_keys=set(('gradivo','listic','zadaca','komentar'))
 def add_entry(link,data):
-    ID=sha256(str(data).encode()).hexdigest()
-    print(ID)
+    if type(data)!=dict: return False
+    if set(data.keys())!=req_keys: return False
+    str_repr=(f"{data['gradivo']}"
+              f"{data['listic']}"
+              f"{data['zadaca']}"
+              f"{data['komentar']}")
+    ID=sha256(str_repr.encode()).hexdigest()
+    date=datetime.now().strftime("%Y-%m-%d")
+    query=("INSERT INTO odgovori "
+           "(ID, datum, gradivo, listic, zadaca, komentar) "
+           f"""VALUES ("{ID}", "{date}", {data['gradivo']}, """
+           f"""{data['listic']}, {data['zadaca']}, "{data['komentar']}")""")
+    print(query)
+    cursor=link.cursor()
+    cursor.execute(query)
+    link.commit()
+    cursor.close()
+    return True
 
 # database init
 ankete=connect()
