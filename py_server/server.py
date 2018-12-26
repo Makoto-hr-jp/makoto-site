@@ -4,12 +4,7 @@ Autor: TM
 Svrha: API za razne podatke
 '''
 # built-in
-from datetime import datetime
-
-def log_msg(tag,text):
-    ret=f"{str(datetime.now()):<28} [{tag}] {text}"
-    print(ret)
-    return ret
+import json
 
 def fail_gracefully():
     try:
@@ -18,43 +13,16 @@ def fail_gracefully():
         pass
     quit()
 
+# addons
+from flask import Flask,Response,request
+from flask_restful import Resource,Api,reqparse
+
+# internal
+import db_ctrl
+from log import log_msg
 log_msg('INFO','Starting REST server...')
 
-# addons / internal
-try:
-    from flask import Flask,Response
-except:
-    log_msg('FAIL','Could not load flask.')
-    fail_gracefully()
-try:
-    from flask_restful import Resource,Api,reqparse
-except:
-    log_msg('FAIL','Could not load flask-restful.')
-    fail_gracefully()
-db_ok=True
-try:
-    import mysql.connector as sql
-except:
-    log_msg('FAIL','Could not load mysql connector module.')
-    db_ok=False
-try:
-    import db_config
-except:
-    log_msg('FAIL','Could not load database configuration module.')
-    db_ok=False
-try:
-    ankete_cfg=db_config.get_db_cfg("ankete.cfg")
-except:
-    log_msg('FAIL','Missing or broken cfg file "ankete.cfg".')
-    db_ok=False
-try:
-    feedback_db=sql.connect(**ankete_cfg,database='tjedne_ankete')
-except:
-    log_msg('FAIL','Could not establish link to feedback database.')
-
-# builtin
-import json
-
+# app init
 app=Flask(__name__)
 api=Api(app)
 
@@ -65,6 +33,17 @@ def get_status():
                     WARN - čudno, ali ne kritično
                     ERRS - nešto ne radi
     '''
-    return Response(json.dumps({'status':'OK'}))
+    st='OK'
+    components=[db_ctrl.dbconn]
+    for c in components:
+        if st=='OK':
+            if c!='OK': st=c
+        elif st=='WARN':
+            if c!='OK':
+                st=c
+    status={'status':st,
+            'dbconn':db_ctrl.dbconn}
+    if request.json: print("data:",request.json)
+    return Response(json.dumps(status))
 
 app.run(debug=True)
