@@ -23,7 +23,7 @@ from log import log_msg
 log_msg('INFO','Starting REST server...')
 
 # app init
-app=Flask(__name__,"/../dist/Makoto/")
+app=Flask(__name__)
 api=Api(app)
 
 @app.route("/",methods=['GET'])
