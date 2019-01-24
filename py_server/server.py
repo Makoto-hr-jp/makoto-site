@@ -14,7 +14,7 @@ def fail_gracefully():
     quit()
 
 # addons
-from flask import Flask,Response,request
+from flask import Flask,Response,request,render_template
 from flask_restful import Resource,Api,reqparse
 
 # internal
@@ -25,6 +25,10 @@ log_msg('INFO','Starting REST server...')
 # app init
 app=Flask(__name__)
 api=Api(app)
+
+@app.route("/")
+def serve_index():
+    return render_template("../dist/Makoto/index.html")
 
 @app.route("/api-status",methods=['GET'])
 def get_status():
