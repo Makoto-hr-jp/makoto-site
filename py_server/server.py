@@ -1,4 +1,4 @@
-'''
+﻿'''
 Autor: TM
 
 Svrha: API za razne podatke
@@ -28,7 +28,7 @@ api=Api(app)
 
 @app.route("/")
 def serve_index():
-    return render_template("../dist/Makoto/index.html")
+    return render_template("../ng_frontend/index.html")
 
 @app.route("/api-status",methods=['GET'])
 def get_status():
