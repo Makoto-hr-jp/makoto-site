@@ -14,7 +14,7 @@ def fail_gracefully():
     quit()
 
 # addons
-from flask import Flask,Response,request,render_template
+from flask import Flask,Response,request,send_from_directory
 from flask_restful import Resource,Api,reqparse
 
 # internal
@@ -23,12 +23,16 @@ from log import log_msg
 log_msg('INFO','Starting REST server...')
 
 # app init
-app=Flask(__name__)
+app=Flask(__name__,"/../dist/Makoto/")
 api=Api(app)
 
-@app.route("/")
+@app.route("/",methods=['GET'])
 def serve_index():
-    return render_template("../ng_frontend/index.html")
+    return send_from_directory('../ng_frontend','index.html')
+
+@app.route("/<path:path>",methods=['GET'])
+def serve_path(path):
+    return send_from_directory('../ng_frontend',path)
 
 @app.route("/api-status",methods=['GET'])
 def get_status():
@@ -49,5 +53,10 @@ def get_status():
             'dbconn':db_ctrl.dbconn}
     if request.json: print("data:",request.json)
     return Response(json.dumps(status))
+
+@app.route("/api-data",methods=['POST'])
+def post_data():
+    print("I got some stuff!")
+    return "OK"
 
 app.run(debug=True)
