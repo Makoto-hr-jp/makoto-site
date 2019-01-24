@@ -56,7 +56,7 @@ def get_status():
 
 @app.route("/api-data",methods=['POST'])
 def post_data():
-    print("I got some stuff!")
+    print(f"I got: {request.json}")
     return "OK"
 
 app.run(debug=True)

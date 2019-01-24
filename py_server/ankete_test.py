@@ -19,6 +19,10 @@ def get_status():
     print(r.text)
     return r.status_code
 
+def probe_post():
+    r=requests.post(url=root+'api-data',json=makej({'a':'b'}))
+    return r
+
 class osnovne_funkcije(TestCase):
     def test_status(self):
         self.assertEqual(get_status(),200)
