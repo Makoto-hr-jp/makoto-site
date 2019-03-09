@@ -1,0 +1,32 @@
+{
+"title": "test", 
+"url": "api-data", 
+"poll": { 
+	"lesson": {
+		"question": "Koliko sam razumio gradivo s radionica?",
+		"answers": [
+		  "Ne mogu prepoznati većinu riječi ni gramatiku",
+		  "Mogu prepoznati riječi i gramatiku",
+		  "Razumijem jednostavne primjere koje smo obradili",
+		  "Mogu smisliti svoje primjere upotrebe naučenog",
+		  "Razumijem sve što smo obradili"
+		]
+	  },
+	"flier": {
+		"question": "Koliko mi listić pomaže?",
+		"answers": [
+		  "Ne mogu se podsjetiti na gradivo sa sata koristeći listić",
+		  "Uglavnom je dobar podsjetnik ali ima nejasnih dijelova",
+		  "Čitajući listić bolje shvaćam obrađeno gradivo"
+		  ]
+		},
+	"homework": {
+		"question": "Kakva je bila prethodna DZ?",
+		"answers": [
+		  "Bilo je preteško u odnosu na primjere sa sata",
+		  "Većina ili svi zadaci bili su odgovarajuće težine",
+		  "Bilo je prelagano u odnosu na sat"
+		  ]
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+  "pitanja": {
+    "gradivo": "Koliko sam razumio gradivo s radionica?",
+    "listić": "Koliko mi listić pomaže?",
+    "zadaća": "Kakva je bila prethodna DZ?"
+  },
+  "odgovori": {
+    "gradivo": [
+      "Ne mogu prepoznati većinu riječi ni gramatiku",
+      "Mogu prepoznati riječi i gramatiku",
+      "Razumijem jednostavne primjere koje smo obradili",
+      "Mogu smisliti svoje primjere upotrebe naučenog",
+      "Razumijem sve što smo obradili"
+    ],
+    "listić": [
+      "Ne mogu se podsjetiti na gradivo sa sata koristeći listić",
+      "Uglavnom je dobar podsjetnik ali ima nejasnih dijelova",
+      "Čitajući listić bolje shvaćam obrađeno gradivo"
+    ],
+    "zadaća": [
+      "Bilo je preteško u odnosu na primjere sa sata",
+      "Većina ili svi zadaci bili su odgovarajuće težine",
+      "Bilo je prelagano u odnosu na sat"
+    ]
+  }
+}

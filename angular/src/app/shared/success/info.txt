@@ -1,0 +1,1 @@
+Komponenta koja potvrđuje uspješno slanje podataka na server.

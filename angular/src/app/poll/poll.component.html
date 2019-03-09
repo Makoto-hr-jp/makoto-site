@@ -1,0 +1,32 @@
+
+<div class="row">
+  <!--<div class="col-4"></div> <!-- Pomjeri anketu u sredinu -->
+  <div class="col-4 mx-auto">
+  
+	<h1>Anketa za lekciju {{ dataService.getTitle() }}</h1>
+	<br><br>
+	<form [formGroup]="dataService.pollForm" (ngSubmit)="onSubmit()">
+
+	  <div class="form-group" *ngFor="let category of dataService.getPoll() | keyvalue; let i=index">
+			<label [for]="category.key">{{(category.value | keyvalue)[1].value}}</label>
+			<div class="radio" *ngFor="let answer of (category.value | keyvalue)[0].value; let j=index">
+				<label>
+				<input type="radio" [id]="category.key" [value]="j" [formControlName] = "category.key">
+					{{answer}}
+				</label>
+			</div>
+			<br>
+	  </div>
+
+	  <div class="form-group">
+			<label for="comment">Komentar</label><br>
+			<textarea class="form-control z-depth-1" id="comment" [formControlName]="'comment'" name="comment" rows="6">
+			</textarea>
+	  </div>
+
+	  <button type="submit" class="btn btn-primary" [disabled]="!dataService.pollForm.valid">Spremi</button>
+
+	</form>
+
+  </div>
+</div>
